@@ -121,6 +121,73 @@ html {
   transform: translateY(-8px);
 }
 
+/* SDG orbit */
+.sdg-rotator-wrap {
+  position: relative;
+}
+
+.sdg-rotator {
+  position: relative;
+  width: min(80vw, 420px);
+  aspect-ratio: 1;
+}
+
+.sdg-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: radial-gradient(circle at center, rgba(76, 159, 56, 0.15), transparent 65%);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.35) inset, 0 0 40px rgba(255, 255, 255, 0.04);
+}
+
+.sdg-orbit-glow {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.07);
+}
+
+.sdg-node {
+  --radius: min(32vw, 180px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: rotate(var(--angle)) translateX(var(--radius)) rotate(calc(-1 * var(--angle)));
+  transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+.sdg-node-inner {
+  width: 104px;
+  height: 104px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.sdg-node.is-active .sdg-node-inner {
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45), 0 0 30px rgba(255, 255, 255, 0.15);
+  transform: scale(1.08);
+  filter: brightness(1.05);
+}
+
+.sdg-core {
+  position: absolute;
+  inset: 28%;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.25rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
 /* Team grid/layout */
 .team-grid {
   display: grid;
