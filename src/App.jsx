@@ -10,6 +10,7 @@ import ProblemSection from './components/ProblemSection';
 import SolutionSection from './components/SolutionSection';
 import HowItWorks from './components/HowItWorks';
 import TechnologySection from './components/TechnologySection';
+import ErrorSourcesSection from './components/ErrorSourcesSection';
 import ResultsSection from './components/ResultsSection';
 import TeamSection from './components/TeamSection';
 import ValidationSection from './components/ValidationSection';
@@ -65,6 +66,8 @@ function App() {
       <div id="technology">
         <TechnologySection />
       </div>
+
+      <ErrorSourcesSection />
 
       <div id="results">
         <ResultsSection />

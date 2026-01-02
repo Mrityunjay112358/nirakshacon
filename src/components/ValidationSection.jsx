@@ -32,7 +32,7 @@ export default function ValidationSection() {
   }, { scope: container });
 
   return (
-    <section ref={container} className="validation-section relative py-32 md:py-40 px-6 bg-primary-light overflow-hidden">
+    <section id="validation" ref={container} className="validation-section relative py-32 md:py-40 px-6 bg-primary-light overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">

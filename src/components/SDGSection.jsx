@@ -89,6 +89,7 @@ export default function SDGSection() {
 
   return (
     <section
+      id="sdgs"
       ref={wrapperRef}
       className="relative px-6 bg-gradient-to-b from-primary to-primary-light overflow-visible"
       style={{ height: `${WRAPPER_HEIGHT_VH}vh` }}

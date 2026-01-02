@@ -11,37 +11,19 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useGSAP(() => {
-    // Show nav after intro
-    ScrollTrigger.create({
-      trigger: '.problem-section',
-      start: 'top 80%',
-      onEnter: () => gsap.to('.main-nav', { y: 0, opacity: 1, duration: 0.5 }),
-      onLeaveBack: () => gsap.to('.main-nav', { y: -100, opacity: 0, duration: 0.3 })
-    });
-
-    // Hide on scroll down, show on scroll up
-    let lastScroll = 0;
-    ScrollTrigger.create({
-      start: 0,
-      end: 'max',
-      onUpdate: (self) => {
-        const currentScroll = self.scroll();
-        if (currentScroll > lastScroll && currentScroll > 100) {
-          gsap.to('.main-nav', { y: -100, duration: 0.3 });
-        } else {
-          gsap.to('.main-nav', { y: 0, duration: 0.3 });
-        }
-        lastScroll = currentScroll;
-      }
-    });
+    // Always visible navigation
+    gsap.set('.main-nav', { y: 0, opacity: 1 });
   }, { scope: container });
 
   const navItems = [
     { label: 'Problem', href: '#problem' },
     { label: 'Solution', href: '#solution' },
+    { label: 'How It Works', href: '#how-it-works' },
     { label: 'Technology', href: '#technology' },
     { label: 'Results', href: '#results' },
+    { label: 'SDGs', href: '#sdgs' },
     { label: 'Team', href: '#team' },
+    { label: 'Validation', href: '#validation' },
     { label: 'Contact', href: '#contact' }
   ];
 
@@ -54,10 +36,10 @@ export default function Navigation() {
   };
 
   return (
-    <nav ref={container} className="main-nav fixed top-0 left-0 right-0 z-50 opacity-0 -translate-y-full">
+    <nav ref={container} className="main-nav fixed top-0 left-0 right-0 z-[100]">
       <div className="glass border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
               <img

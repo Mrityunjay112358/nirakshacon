@@ -7,7 +7,7 @@ export default function Footer() {
   const container = useRef();
 
   return (
-    <footer ref={container} className="relative py-20 px-6 bg-gradient-to-b from-primary to-black">
+    <footer id="contact" ref={container} className="relative py-20 px-6 bg-gradient-to-b from-primary to-black">
       <div className="max-w-7xl mx-auto">
 
         {/* Footer Content */}

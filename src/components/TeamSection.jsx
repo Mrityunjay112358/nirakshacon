@@ -62,7 +62,7 @@ export default function TeamSection() {
   ];
 
   return (
-    <section ref={container} className="team-section relative py-32 md:py-40 px-6 bg-gradient-to-b from-primary-light to-primary overflow-visible">
+    <section id="team" ref={container} className="team-section relative py-32 md:py-40 px-6 bg-gradient-to-b from-primary-light to-primary overflow-visible">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
@@ -71,6 +71,16 @@ export default function TeamSection() {
           </h2>
           <p className="text-xl md:text-2xl text-muted max-w-3xl mx-auto">
             Five high school students from Jaipur • 18 months of field research
+          </p>
+        </div>
+
+        {/* Motivation Section */}
+        <div className="team-card mb-16 bg-gradient-to-r from-accent/10 to-highlight/10 rounded-3xl p-8 md:p-12 border border-accent/20">
+          <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">
+            Our <span className="gradient-text">Motivation</span>
+          </h3>
+          <p className="text-lg md:text-xl text-muted leading-relaxed text-center max-w-4xl mx-auto">
+            Growing up across various rural areas of Rajasthan, we saw farming up close and noticed something that didn't add up. Farmers were spending thousands on pesticides, spraying entire fields uniformly, yet still losing a significant portion of their crops to pests. The technology to detect problems early existed for large commercial farms abroad, as revealed in our research, but nothing was accessible or affordable for Indian farmers. Thus, through the combination of our technical and management skills, we set out to help close that gap.
           </p>
         </div>
 

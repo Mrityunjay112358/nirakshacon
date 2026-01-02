@@ -128,7 +128,7 @@ export default function TechnologySection() {
   ];
 
   return (
-    <section ref={container} className="technology-section relative py-32 md:py-40 px-6 bg-gradient-to-b from-primary to-primary-light overflow-hidden">
+    <section id="technology" ref={container} className="technology-section relative py-32 md:py-40 px-6 bg-gradient-to-b from-primary to-primary-light overflow-hidden">
       {/* Particle background effect */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0" style={{
@@ -141,7 +141,7 @@ export default function TechnologySection() {
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
           <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white">
-            Built <span className="gradient-text">Different</span>
+            Our <span className="gradient-text">Innovation</span>
           </h2>
           <p className="text-xl md:text-2xl text-muted max-w-3xl mx-auto">
             Patent-pending adaptive AI that learns each farm's unique conditions

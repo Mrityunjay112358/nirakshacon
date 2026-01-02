@@ -16,6 +16,7 @@ export default function IntroSequence() {
       rotation: -5
     });
     gsap.set('.hero-content', { opacity: 0, y: 60 });
+    gsap.set('.category-badge', { y: 30, opacity: 0 });
     gsap.set('.hero-title-word', { y: 100, opacity: 0 });
     gsap.set('.hero-subtitle', { y: 40, opacity: 0 });
     gsap.set('.hero-stats', { y: 30, opacity: 0, scale: 0.9 });
@@ -93,6 +94,13 @@ export default function IntroSequence() {
         duration: 1
       }, 'reveal+=0.5')
 
+      // Category badge
+      .to('.category-badge', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6
+      }, 'reveal+=0.6')
+
       // Staggered title words
       .to('.hero-title-word', {
         y: 0,
@@ -154,6 +162,14 @@ export default function IntroSequence() {
 
         {/* Hero Content Layer (revealed after drone) */}
         <div className="hero-content absolute inset-0 flex flex-col items-center justify-center z-10 px-6 text-center">
+          {/* Category Badge */}
+          <div className="category-badge mb-6">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-accent/20 backdrop-blur-sm rounded-full border border-accent/30">
+              <img src="/assets/images/energy.png" alt="Energy and Environment" className="w-8 h-8 object-contain" />
+              <span className="text-highlight font-semibold text-lg">Energy and Environment</span>
+            </div>
+          </div>
+
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 overflow-hidden">
             <span className="hero-title-word inline-block">See</span>{' '}
             <span className="hero-title-word inline-block">Pests</span>{' '}

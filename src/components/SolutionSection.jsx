@@ -34,7 +34,7 @@ export default function SolutionSection() {
   }, { scope: container });
 
   return (
-    <section ref={container} className="solution-section relative py-32 md:py-40 px-6 bg-primary">
+    <section id="solution" ref={container} className="solution-section relative py-32 md:py-40 px-6 bg-primary">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">

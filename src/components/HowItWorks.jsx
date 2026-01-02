@@ -38,7 +38,7 @@ export default function HowItWorks() {
   }, { scope: container });
 
   return (
-    <section ref={container} className="relative bg-gradient-to-b from-primary-light to-primary overflow-visible z-10">
+    <section id="how-it-works" ref={container} className="relative bg-gradient-to-b from-primary-light to-primary overflow-visible z-10">
       {/* Section Header - Outside the pinned container */}
       <div className="text-center py-16 md:py-20 px-6 max-w-5xl mx-auto">
         <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">

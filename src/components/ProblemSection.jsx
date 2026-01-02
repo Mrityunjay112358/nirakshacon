@@ -58,7 +58,7 @@ export default function ProblemSection() {
   }, { scope: container });
 
   return (
-    <section ref={container} className="problem-section relative py-32 md:py-40 px-6 bg-gradient-to-b from-primary to-primary-light">
+    <section id="problem" ref={container} className="problem-section relative py-32 md:py-40 px-6 bg-gradient-to-b from-primary to-primary-light">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
