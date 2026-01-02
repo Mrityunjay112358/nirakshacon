@@ -4,7 +4,7 @@ const WRAPPER_HEIGHT_VH = 240;
 const ORBIT_SIZE = { min: 520, ideal: 820, max: 880 };
 const ICON_SIZE = { desktop: 160, mobile: 120 };
 const VISIBLE_RATIO = 0.55; // top arc only
-const ORBIT_VIEWPORT_HEIGHT = 'clamp(340px, 45vh, 520px)';
+const ORBIT_VIEWPORT_HEIGHT = null; // use orbitSize-derived height to keep orbit large
 
 const SDGS = [
   {
@@ -43,14 +43,6 @@ export default function SDGSection() {
   const [rotation, setRotation] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [imageError, setImageError] = useState({});
-  const debugRef = useRef({
-    wrapperTop: 0,
-    wrapperHeight: 0,
-    scrollY: 0,
-    progress: 0,
-    activeIndex: 0,
-    activeId: SDGS[0].id
-  });
 
   const orbitSize = useMemo(
     () => `clamp(${ORBIT_SIZE.min}px, ${ORBIT_SIZE.ideal}px, ${ORBIT_SIZE.max}px)`,
@@ -77,14 +69,6 @@ export default function SDGSection() {
       const idx = Math.round(progress * (SDGS.length - 1));
       setActiveIndex(idx);
       setRotation(progress * 360);
-      debugRef.current = {
-        wrapperTop: Math.round(wrapperTop),
-        wrapperHeight: Math.round(wrapperHeight),
-        scrollY: Math.round(scrollY),
-        progress: Number(progress.toFixed(3)),
-        activeIndex: idx,
-        activeId: SDGS[idx].id
-      };
     };
 
     const onScroll = () => requestAnimationFrame(handle);
@@ -112,28 +96,8 @@ export default function SDGSection() {
       <div className="max-w-6xl mx-auto h-full">
         <div
           className="sticky top-0 h-screen grid gap-6 md:gap-8"
-          style={{ gridTemplateRows: 'auto minmax(340px,1fr) auto' }}
+          style={{ gridTemplateRows: 'auto minmax(380px,1fr) auto' }}
         >
-          {/* Debug overlay */}
-          <div className="fixed top-4 left-4 z-30 bg-black/70 text-xs text-white px-3 py-2 rounded-lg space-y-1 pointer-events-auto">
-            <div>wrapperTop: {debugRef.current.wrapperTop}</div>
-            <div>wrapperHeight: {debugRef.current.wrapperHeight}</div>
-            <div>scrollY: {debugRef.current.scrollY}</div>
-            <div>progress: {debugRef.current.progress}</div>
-            <div>activeIndex: {debugRef.current.activeIndex}</div>
-            <div>activeId: {debugRef.current.activeId}</div>
-            <div>iconUrl: {active.icon}</div>
-            <a
-              className="underline text-blue-300"
-              href={active.icon}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open icon
-            </a>
-            <div>fallback: {showFallback ? 'true' : 'false'}</div>
-          </div>
-
           {/* Header */}
           <div className="pt-8 pb-2 text-center">
             <h2 className="text-4xl md:text-6xl font-bold text-white">
@@ -147,7 +111,7 @@ export default function SDGSection() {
               className="sdg-rotator relative"
               style={{
                 width: orbitSize,
-                height: ORBIT_VIEWPORT_HEIGHT,
+                height: ORBIT_VIEWPORT_HEIGHT || `calc(${orbitSize} * ${VISIBLE_RATIO})`,
                 clipPath: 'inset(0 0 45% 0)'
               }}
             >
