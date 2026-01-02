@@ -107,12 +107,14 @@ html {
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   width: 100%;
+  align-items: start;
 }
 
 .sdg-card {
   border: none !important;
   background: transparent !important;
   transition: transform 0.3s;
+  height: 100%;
 }
 
 .sdg-card:hover {
@@ -125,12 +127,14 @@ html {
   grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
   width: 100%;
+  align-items: start;
 }
 
 .team-card {
   border: none !important;
   background: rgba(255, 255, 255, 0.02);
   transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
 }
 
 .team-card:hover {

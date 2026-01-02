@@ -10,42 +10,52 @@ export default function TeamSection() {
   const container = useRef();
 
   useGSAP(() => {
-    gsap.from('.team-card', {
-      scrollTrigger: {
-        trigger: '.team-section',
-        start: 'top 80%',
-        toggleActions: 'play none none none'
-      },
-      y: 80,
-      opacity: 0,
-      stagger: 0.2,
-      duration: 1
-    });
+    const teamCards = gsap.utils.toArray('.team-card');
+
+    gsap.fromTo(
+      teamCards,
+      { y: 80, opacity: 0, rotateY: -10, scale: 0.92 },
+      {
+        y: 0,
+        opacity: 1,
+        rotateY: 0,
+        scale: 1,
+        stagger: 0.1,
+        duration: 1.2,
+        ease: 'elastic.out(1, 0.7)',
+        scrollTrigger: {
+          trigger: '.team-section',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        },
+        transformOrigin: 'center center'
+      }
+    );
   }, { scope: container });
 
   const team = [
     {
-      name: 'Aaditya',
+      name: 'Aaditya Jain',
       role: 'Problem Validation & Farmer Research',
       description: 'Led on-ground farmer interviews and market validation'
     },
     {
-      name: 'Mrityunjay',
+      name: 'Mrityunjay Gupta',
       role: 'Hardware & AI Development',
       description: 'Architected the tri-modal AI system and drone hardware'
     },
     {
-      name: 'Ariana',
+      name: 'Ariana Agarwal',
       role: 'Farmer Outreach & FPO Partnerships',
       description: 'Built relationships with 5 FPOs and 150+ farmers'
     },
     {
-      name: 'Yashkit',
+      name: 'Yashkit Jain',
       role: 'Product Design',
       description: 'Designed user experience and farmer-facing interfaces'
     },
     {
-      name: 'Ritwika',
+      name: 'Ritwika Sinwer',
       role: 'Field Data & Trials',
       description: 'Coordinated 8+ field trials and data collection'
     }
@@ -92,13 +102,6 @@ export default function TeamSection() {
               </p>
             </div>
           ))}
-        </div>
-
-        {/* Footer Text */}
-        <div className="text-center">
-          <p className="text-lg text-muted max-w-2xl mx-auto">
-            Seeking advisors in agricultural engineering, rural distribution, and scaling.
-          </p>
         </div>
       </div>
     </section>

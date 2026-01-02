@@ -11,17 +11,26 @@ export default function SDGSection() {
   const [selectedSDG, setSelectedSDG] = useState(null);
 
   useGSAP(() => {
-    gsap.from('.sdg-card', {
-      scrollTrigger: {
-        trigger: '.sdg-section',
-        start: 'top 80%',
-        toggleActions: 'play none none none'
-      },
-      y: 80,
-      opacity: 0,
-      stagger: 0.2,
-      duration: 1
-    });
+    const sdgCards = gsap.utils.toArray('.sdg-card');
+
+    gsap.fromTo(
+      sdgCards,
+      { y: 80, opacity: 0, rotate: -4, scale: 0.9 },
+      {
+        y: 0,
+        opacity: 1,
+        rotate: 0,
+        scale: 1,
+        stagger: 0.12,
+        duration: 1.2,
+        ease: 'elastic.out(1, 0.7)',
+        scrollTrigger: {
+          trigger: '.sdg-section',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
   }, { scope: container });
 
   const sdgs = [
