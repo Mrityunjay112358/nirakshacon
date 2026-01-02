@@ -137,13 +137,14 @@ export default function SDGSection() {
           </div>
 
           {/* Orbit + card */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-6 md:gap-8">
+          <div className="flex-1 flex flex-col items-center justify-center gap-6 md:gap-8 pt-2 md:pt-4">
             <div
               className="sdg-rotator relative"
               style={{
                 width: orbitSize,
                 height: `calc(${orbitSize} * ${VISIBLE_RATIO})`,
-                clipPath: 'inset(0 0 45% 0)'
+                clipPath: 'inset(0 0 45% 0)',
+                marginTop: '12px'
               }}
             >
               <div
@@ -169,7 +170,7 @@ export default function SDGSection() {
                 <div
                   className="absolute left-1/2 -translate-x-1/2 z-30 flex items-center justify-center"
                   style={{
-                    top: `calc(${orbitSize} * (1 - ${VISIBLE_RATIO}) + ${orbitSize} * 0.05)`,
+                    top: `calc(${orbitSize} * (1 - ${VISIBLE_RATIO}) + ${orbitSize} * 0.10)`,
                     width: iconClamp,
                     height: iconClamp
                   }}
@@ -185,7 +186,8 @@ export default function SDGSection() {
                       position: 'relative',
                       overflow: 'hidden',
                       background: 'rgba(255,255,255,0.12)',
-                      border: '1px solid rgba(255,255,255,0.25)'
+                      border: '1px solid rgba(255,255,255,0.25)',
+                      transform: reducedMotion ? undefined : `rotate(${rotation * -0.2}deg)`
                     }}
                   >
                     {!showFallback ? (
