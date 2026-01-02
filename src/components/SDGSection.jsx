@@ -44,7 +44,7 @@ export default function SDGSection() {
 
   useGSAP(() => {
     const total = sdgs.length;
-    const cards = gsap.utils.toArray('.sdg-detail');
+    const cards = gsap.utils.toArray('.sdg-detail-card');
 
     // Pin and rotate the orbit
     const rotation = gsap.to(ringRef.current, {
@@ -52,8 +52,8 @@ export default function SDGSection() {
       ease: 'none',
       scrollTrigger: {
         trigger: container.current,
-        start: 'top center',
-        end: '+=2000',
+        start: 'top center+=40',
+        end: '+=1600',
         scrub: true,
         pin: pinRef.current
       }
@@ -63,8 +63,8 @@ export default function SDGSection() {
     let current = 0;
     const stepper = ScrollTrigger.create({
       trigger: container.current,
-      start: 'top center',
-      end: '+=2000',
+      start: 'top center+=40',
+      end: '+=1600',
       scrub: true,
       onUpdate: (self) => {
         const segment = Math.min(total - 1, Math.floor(self.progress * total));
@@ -83,7 +83,7 @@ export default function SDGSection() {
       ease: 'power3.out',
       scrollTrigger: {
         trigger: container.current,
-        start: 'top center+=50'
+        start: 'top center+=20'
       }
     });
 
@@ -93,68 +93,62 @@ export default function SDGSection() {
     };
   }, { scope: container });
 
+  useGSAP(() => {
+    gsap.fromTo(
+      '.sdg-detail-card',
+      { autoAlpha: 0, y: 18 },
+      { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+    );
+  }, { scope: container, dependencies: [activeIndex] });
+
   const active = sdgs[activeIndex];
 
   return (
     <>
-      <section ref={container} className="sdg-section relative py-32 md:py-40 px-6 bg-gradient-to-b from-primary to-primary-light overflow-visible">
-        <div className="max-w-7xl mx-auto">
+      <section ref={container} className="sdg-section relative py-24 md:py-28 px-6 bg-gradient-to-b from-primary to-primary-light overflow-visible">
+        <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16 md:mb-20">
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+          <div className="text-center mb-10 md:mb-12">
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-white">
               Aligned with UN <span className="gradient-text">Sustainable Development Goals</span>
             </h2>
-            <p className="text-xl md:text-2xl text-muted max-w-3xl mx-auto">
-              Scroll to spin the SDG orbit and see how Niraksha advances each goal
+            <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto">
+              Scroll to reveal each goal — minimal UI, motion tells the story
             </p>
           </div>
 
-          <div ref={pinRef} className="sdg-rotator-wrap grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <div ref={pinRef} className="sdg-rotator-wrap flex flex-col items-center gap-8 md:gap-10">
             {/* Rotating Orbit */}
-            <div className="flex justify-center">
-              <div className="sdg-rotator">
-                <div className="sdg-ring" ref={ringRef}>
-                  <div className="sdg-orbit-glow" />
-                  {sdgs.map((sdg, index) => (
-                    <button
-                      key={sdg.number}
-                      className={`sdg-node ${activeIndex === index ? 'is-active' : ''}`}
-                      style={{ '--angle': `${index * 90}deg`, '--badge': sdg.color }}
-                      onClick={() => setActiveIndex(index)}
-                    >
-                      <div className="sdg-node-inner">
-                        <img src={sdg.image} alt={`SDG ${sdg.number}`} className="w-full h-full object-contain p-3" />
-                      </div>
-                    </button>
-                  ))}
-                </div>
+            <div className="sdg-rotator">
+              <div className="sdg-ring" ref={ringRef}>
+                <div className="sdg-orbit-glow" />
+                {sdgs.map((sdg, index) => (
+                  <button
+                    key={sdg.number}
+                    className={`sdg-node ${activeIndex === index ? 'is-active' : ''}`}
+                    style={{ '--angle': `${index * 90}deg` }}
+                    onClick={() => setActiveIndex(index)}
+                    aria-label={`SDG ${sdg.number}`}
+                  >
+                    <div className="sdg-node-inner">
+                      <img src={sdg.image} alt={`SDG ${sdg.number}`} className="w-full h-full object-contain" />
+                    </div>
+                  </button>
+                ))}
+              </div>
 
-                <div className="sdg-core glass">
-                  <img src={active.image} alt={`SDG ${active.number}`} className="w-24 h-24 object-contain" />
-                  <p className="text-highlight font-semibold mt-4 text-center">
-                    SDG {active.number}
-                  </p>
-                  <p className="text-white text-lg font-bold text-center leading-snug">
-                    {active.title}
-                  </p>
-                </div>
+              <div className="sdg-core glass">
+                <img src={active.image} alt={`SDG ${active.number}`} className="w-24 h-24 object-contain" />
               </div>
             </div>
 
             {/* Detail Panel */}
-            <div className="sdg-detail glass rounded-3xl p-8 md:p-12 shadow-2xl">
-              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full text-sm font-semibold" style={{ backgroundColor: `${active.color}22`, color: active.color }}>
-                <span className="w-3 h-3 rounded-full" style={{ backgroundColor: active.color }} />
-                SDG {active.number}
-              </div>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mt-6 mb-4">
+            <div className="sdg-detail-card glass rounded-3xl p-8 md:p-10 shadow-2xl max-w-3xl w-full">
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 {active.title}
               </h3>
-              <p className="text-lg text-muted leading-relaxed mb-6">
+              <p className="text-lg text-muted leading-relaxed">
                 {active.description}
-              </p>
-              <p className="text-highlight text-sm uppercase tracking-wide">
-                Spin the orbit or tap a badge to explore each goal →
               </p>
             </div>
           </div>
