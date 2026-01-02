@@ -4,6 +4,7 @@ const WRAPPER_HEIGHT_VH = 240;
 const ORBIT_SIZE = { min: 520, ideal: 820, max: 880 };
 const ICON_SIZE = { desktop: 160, mobile: 120 };
 const VISIBLE_RATIO = 0.55; // top arc only
+const ORBIT_VIEWPORT_HEIGHT = 'clamp(340px, 45vh, 520px)';
 
 const SDGS = [
   {
@@ -109,7 +110,10 @@ export default function SDGSection() {
       style={{ height: `${WRAPPER_HEIGHT_VH}vh` }}
     >
       <div className="max-w-6xl mx-auto h-full">
-        <div className="sticky top-0 h-screen flex flex-col">
+        <div
+          className="sticky top-0 h-screen grid gap-6 md:gap-8"
+          style={{ gridTemplateRows: 'auto minmax(340px,1fr) auto' }}
+        >
           {/* Debug overlay */}
           <div className="fixed top-4 left-4 z-30 bg-black/70 text-xs text-white px-3 py-2 rounded-lg space-y-1 pointer-events-auto">
             <div>wrapperTop: {debugRef.current.wrapperTop}</div>
@@ -137,15 +141,14 @@ export default function SDGSection() {
             </h2>
           </div>
 
-          {/* Orbit + card */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-6 md:gap-8 pt-2 md:pt-4">
+          {/* Orbit row */}
+          <div className="flex items-center justify-center">
             <div
               className="sdg-rotator relative"
               style={{
                 width: orbitSize,
-                height: `calc(${orbitSize} * ${VISIBLE_RATIO})`,
-                clipPath: 'inset(0 0 45% 0)',
-                marginTop: '12px'
+                height: ORBIT_VIEWPORT_HEIGHT,
+                clipPath: 'inset(0 0 45% 0)'
               }}
             >
               <div
@@ -220,9 +223,13 @@ export default function SDGSection() {
               </div>
             </div>
 
+          </div>
+
+          {/* Card row */}
+          <div className="flex items-start justify-center pb-10 md:pb-12">
             <div
               key={active.id}
-              className="sdg-detail-card glass rounded-3xl shadow-2xl border border-white/10 transition-all duration-500 ease-out -translate-y-1 md:-translate-y-2"
+              className="sdg-detail-card glass rounded-3xl shadow-2xl border border-white/10 transition-all duration-500 ease-out"
               style={{ width: 'min(1000px, 92vw)' }}
             >
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">{active.title}</h3>
