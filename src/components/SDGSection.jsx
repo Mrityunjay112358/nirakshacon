@@ -11,28 +11,28 @@ const SDGS = [
     title: 'Good Health and Well-being',
     description:
       'Eliminates chronic pesticide exposure for farmers. India sees 1M+ acute poisonings annually from chemical handling. Precision targeting means farmers spray less, inhale and drink less, and handle fewer toxic substances. Crops carry lower chemical residue, reducing health risks for consumers.',
-    icon: '/sdg/03.png'
+    icon: '/assets/images/sdg3.png'
   },
   {
     id: 6,
     title: 'Clean Water and Sanitation',
     description:
       'Prevents agricultural runoff at the source. Currently, 80% of sprayed pesticides miss targets and leach into groundwater and watersheds. By reducing pesticide volume by 40–50% and targeting only affected zones, Niraksha directly protects water quality for rural communities dependent on these sources.',
-    icon: '/sdg/06.png'
+    icon: '/assets/images/sdg6.png'
   },
   {
     id: 12,
     title: 'Responsible Consumption and Production',
     description:
       'Transforms wasteful blanket spraying into data-driven precision agriculture. Farmers currently waste ₹400/acre on chemicals that never reach pests. Niraksha enables targeted intervention, cutting input consumption while maintaining (and improving) crop protection outcomes.',
-    icon: '/sdg/12.png'
+    icon: '/assets/images/sdg12.png'
   },
   {
     id: 13,
     title: 'Climate Action',
     description:
       'Healthier soil sequesters more carbon. Pesticide overuse degrades soil microbiomes and reduces organic matter, which is the earth’s natural carbon sink. By minimizing chemical load on farmland, Niraksha preserves soil health and supports climate-resilient agricultural ecosystems across 140M hectares of Indian farmland.',
-    icon: '/sdg/13.png'
+    icon: '/assets/images/sdg13.png'
   }
 ];
 
