@@ -127,6 +127,7 @@ export default function SDGSection() {
             >
               Open icon
             </a>
+            <div>fallback: {showFallback ? 'true' : 'false'}</div>
           </div>
 
           {/* Header */}
@@ -183,14 +184,20 @@ export default function SDGSection() {
                       width: '100%',
                       height: '100%',
                       boxShadow: '0 18px 50px rgba(0,0,0,0.45)',
-                      margin: '0 auto'
+                      margin: '0 auto',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      background: 'rgba(255,255,255,0.06)',
+                      border: '1px solid rgba(255,255,255,0.18)'
                     }}
                   >
                     {!showFallback ? (
                       <img
                         src={active.icon}
                         alt={`SDG ${active.id}`}
-                        className="w-full h-full object-contain"
+                        width={ICON_SIZE.desktop}
+                        height={ICON_SIZE.desktop}
+                        className="object-contain w-full h-full"
                         loading="eager"
                         onError={() => {
                           console.warn('SDG icon failed to load', active.icon);
@@ -199,8 +206,8 @@ export default function SDGSection() {
                       />
                     ) : (
                       <div
-                        className="w-full h-full flex items-center justify-center text-white text-4xl font-bold"
-                        style={{ background: 'rgba(255,255,255,0.12)' }}
+                        className="absolute inset-0 flex items-center justify-center text-white text-4xl font-bold"
+                        style={{ background: 'rgba(255,255,255,0.25)' }}
                       >
                         {active.id}
                       </div>
