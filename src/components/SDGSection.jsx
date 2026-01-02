@@ -159,7 +159,7 @@ export default function SDGSection() {
                 <div
                   className="sdg-ring z-0"
                   style={{
-                    transform: `translateY(42%) ${reducedMotion ? 'rotate(0deg)' : `rotate(${rotation}deg)`}`
+                    transform: `translateY(42%) ${rotation === 0 || reducedMotion ? 'rotate(0deg)' : `rotate(${rotation}deg)`}`
                   }}
                   aria-hidden
                 >
@@ -187,7 +187,8 @@ export default function SDGSection() {
                       overflow: 'hidden',
                       background: 'rgba(255,255,255,0.12)',
                       border: '1px solid rgba(255,255,255,0.25)',
-                      transform: reducedMotion ? undefined : `rotate(${rotation * -0.2}deg)`
+                      transform:
+                        rotation === 0 || reducedMotion ? undefined : `rotate(${rotation * -0.2}deg)`
                     }}
                   >
                     {!showFallback ? (
