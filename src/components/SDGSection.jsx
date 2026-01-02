@@ -1,43 +1,49 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-const ORBIT_SIZE = 520;
-const VISIBLE_RATIO = 0.65; // show top arc only
+const WRAPPER_HEIGHT = 220; // vh
+const ORBIT_SIZE = { min: 360, ideal: 820, max: 880 }; // px
+const ICON_SIZE = { min: 120, ideal: 160, max: 180 }; // px
+const VISIBLE_RATIO = 0.6; // show top arc only
+
+const SDGS = [
+  {
+    number: 3,
+    title: 'Good Health and Well-being',
+    description:
+      'Eliminates chronic pesticide exposure for farmers. India sees 1M+ acute poisonings annually from chemical handling. Precision targeting means farmers spray less, inhale and drink less, and handle fewer toxic substances. Crops carry lower chemical residue, reducing health risks for consumers.',
+    image: '/sdg/03.png'
+  },
+  {
+    number: 6,
+    title: 'Clean Water and Sanitation',
+    description:
+      'Prevents agricultural runoff at the source. Currently, 80% of sprayed pesticides miss targets and leach into groundwater and watersheds. By reducing pesticide volume by 40–50% and targeting only affected zones, Niraksha directly protects water quality for rural communities dependent on these sources.',
+    image: '/sdg/06.png'
+  },
+  {
+    number: 12,
+    title: 'Responsible Consumption and Production',
+    description:
+      'Transforms wasteful blanket spraying into data-driven precision agriculture. Farmers currently waste ₹400/acre on chemicals that never reach pests. Niraksha enables targeted intervention, cutting input consumption while maintaining (and improving) crop protection outcomes.',
+    image: '/sdg/12.png'
+  },
+  {
+    number: 13,
+    title: 'Climate Action',
+    description:
+      'Healthier soil sequesters more carbon. Pesticide overuse degrades soil microbiomes and reduces organic matter, which is the earth’s natural carbon sink. By minimizing chemical load on farmland, Niraksha preserves soil health and supports climate-resilient agricultural ecosystems across 140M hectares of Indian farmland.',
+    image: '/sdg/13.png'
+  }
+];
 
 export default function SDGSection() {
   const containerRef = useRef(null);
-  const ringRef = useRef(null);
   const [rotation, setRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const snapTimeout = useRef(null);
 
-  const sdgs = [
-    {
-      number: 3,
-      title: 'Good Health and Well-being',
-      image: '/assets/images/sdg3.png',
-      description: 'Reduces farmer pesticide exposure and lowers chemical residue in crops.'
-    },
-    {
-      number: 6,
-      title: 'Clean Water and Sanitation',
-      image: '/assets/images/sdg6.png',
-      description: 'Prevents 40-50% of agricultural chemical runoff into groundwater.'
-    },
-    {
-      number: 12,
-      title: 'Responsible Consumption and Production',
-      image: '/assets/images/sdg12.png',
-      description: 'Transforms wasteful blanket spraying into precision, data-driven agriculture.'
-    },
-    {
-      number: 13,
-      title: 'Climate Action',
-      image: '/assets/images/sdg13.png',
-      description: 'Preserves soil health and carbon sequestration by minimizing chemical degradation.'
-    }
-  ];
-
-  const segment = 360 / sdgs.length;
+  const segment = 360 / SDGS.length;
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -61,7 +67,17 @@ export default function SDGSection() {
         const total = rect.height - viewport;
         if (total <= 0) return;
         const progress = Math.min(Math.max((viewport - rect.top) / total, 0), 1);
-        setRotation(progress * 360);
+        const nextRotation = progress * 360;
+        setRotation(nextRotation);
+
+        const idx = Math.round((progress * (SDGS.length - 1)));
+        if (idx !== activeIndex) setActiveIndex(idx);
+
+        if (snapTimeout.current) clearTimeout(snapTimeout.current);
+        snapTimeout.current = setTimeout(() => {
+          const snappedRotation = (idx / SDGS.length) * 360;
+          setRotation(snappedRotation);
+        }, 120);
       });
     };
 
@@ -70,45 +86,28 @@ export default function SDGSection() {
       window.removeEventListener('scroll', onScroll);
       media.removeEventListener('change', onMedia);
       if (frame) cancelAnimationFrame(frame);
+      if (snapTimeout.current) clearTimeout(snapTimeout.current);
     };
-  }, []);
+  }, [activeIndex]);
 
-  const active = sdgs[activeIndex];
+  const active = SDGS[activeIndex];
 
-  useEffect(() => {
-    const normalized = ((rotation % 360) + 360) % 360;
-    const snapped = Math.round(normalized / segment) % sdgs.length;
-    if (snapped !== activeIndex) {
-      setActiveIndex(snapped);
-    }
-  }, [rotation, segment, sdgs.length, activeIndex]);
-
-  const iconNodes = useMemo(() => {
-    const radius = ORBIT_SIZE * 0.38;
-    return sdgs.map((sdg, index) => {
-      const angle = (360 / sdgs.length) * index;
-      const rad = (angle * Math.PI) / 180;
-      const x = radius * Math.sin(rad);
-      const y = -radius * Math.cos(rad);
-      return (
-        <div
-          key={sdg.number}
-          className={`sdg-node ${activeIndex === index ? 'is-active' : ''}`}
-          style={{ transform: `translate(${x}px, ${y}px)` }}
-          aria-hidden
-        >
-          <div className="sdg-node-inner">
-            <img src={sdg.image} alt={`SDG ${sdg.number}`} className="w-full h-full object-contain" />
-          </div>
-        </div>
-      );
-    });
-  }, [activeIndex, sdgs]);
+  const iconSize = useMemo(
+    () => `clamp(${ICON_SIZE.min}px, ${ICON_SIZE.ideal}px, ${ICON_SIZE.max}px)`,
+    []
+  );
+  const orbitSize = useMemo(
+    () => `clamp(${ORBIT_SIZE.min}px, ${ORBIT_SIZE.ideal}px, ${ORBIT_SIZE.max}px)`,
+    []
+  );
 
   return (
-    <section ref={containerRef} className="sdg-section relative h-[220vh] px-6 bg-gradient-to-b from-primary to-primary-light overflow-visible">
+    <section
+      ref={containerRef}
+      className="sdg-section relative px-6 bg-gradient-to-b from-primary to-primary-light overflow-visible"
+      style={{ height: `${WRAPPER_HEIGHT}vh` }}
+    >
       <div className="max-w-6xl mx-auto h-full">
-        {/* Sticky frame */}
         <div className="sticky top-0 h-screen flex flex-col">
           {/* Header */}
           <div className="pt-8 pb-4 text-center">
@@ -116,41 +115,72 @@ export default function SDGSection() {
               Aligned with UN <span className="gradient-text">Sustainable Development Goals</span>
             </h2>
             <p className="mt-3 text-lg md:text-xl text-muted max-w-3xl mx-auto">
-              Scroll controls rotation only — the orbit stays anchored.
+              Scroll to rotate — one goal at a time.
             </p>
           </div>
 
           {/* Orbit + card */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-8 md:gap-10">
+          <div className="flex-1 flex flex-col items-center justify-center gap-10">
             <div
-              className="sdg-rotator relative overflow-hidden"
-              style={{ width: ORBIT_SIZE, height: ORBIT_SIZE * VISIBLE_RATIO }}
+              className="sdg-rotator relative"
+              style={{
+                width: orbitSize,
+                height: `calc(${orbitSize} * ${VISIBLE_RATIO})`,
+                clipPath: 'inset(0 0 40% 0)',
+              }}
             >
               <div
                 className="absolute"
                 style={{
-                  width: ORBIT_SIZE,
-                  height: ORBIT_SIZE,
+                  width: orbitSize,
+                  height: orbitSize,
                   left: 0,
-                  top: -(ORBIT_SIZE * (1 - VISIBLE_RATIO)),
+                  top: `calc(-1 * ${orbitSize} * (1 - ${VISIBLE_RATIO}))`,
                 }}
               >
                 <div
-                  ref={ringRef}
                   className="sdg-ring"
                   style={{
-                    transform: `translateY(40%) ${reducedMotion ? 'rotate(0deg)' : `rotate(${rotation}deg)`}`,
+                    transform: `translateY(42%) ${reducedMotion ? 'rotate(0deg)' : `rotate(${rotation}deg)`}`,
                   }}
+                  aria-hidden
                 >
                   <div className="sdg-orbit-glow" />
-                  {iconNodes}
+                  <div className="sdg-orbit-dots" />
+                </div>
+
+                {/* Active icon only */}
+                <div
+                  className="absolute left-1/2 -translate-x-1/2"
+                  style={{
+                    top: `calc(${orbitSize} * 0.08)`,
+                  }}
+                >
+                  <div
+                    className={`sdg-node-inner ${reducedMotion ? '' : 'transition-all duration-500 ease-out'} ${reducedMotion ? '' : 'will-change-transform'}`}
+                    style={{
+                      width: iconSize,
+                      height: iconSize,
+                      boxShadow: '0 18px 50px rgba(0,0,0,0.45)',
+                    }}
+                  >
+                    <img
+                      src={active.image}
+                      alt={`SDG ${active.number}`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="sdg-detail-card glass rounded-3xl p-8 md:p-10 shadow-2xl max-w-3xl w-full">
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">{active.title}</h3>
-              <p className="text-lg text-muted leading-relaxed">{active.description}</p>
+            <div
+              key={active.number}
+              className="sdg-detail-card glass rounded-3xl shadow-2xl border border-white/10 transition-all duration-500 ease-out"
+              style={{ width: 'min(1000px, 92vw)' }}
+            >
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">{active.title}</h3>
+              <p className="text-lg md:text-xl text-muted leading-relaxed">{active.description}</p>
             </div>
           </div>
         </div>
