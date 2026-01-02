@@ -128,8 +128,10 @@ html {
 
 .sdg-rotator {
   position: relative;
-  width: min(80vw, 420px);
+  width: min(90vw, 420px);
   aspect-ratio: 1;
+  overflow: hidden;
+  clip-path: inset(0 0 50% 0);
 }
 
 .sdg-ring {
@@ -139,6 +141,7 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: radial-gradient(circle at center, rgba(76, 159, 56, 0.15), transparent 65%);
   box-shadow: 0 0 80px rgba(0, 0, 0, 0.35) inset, 0 0 40px rgba(255, 255, 255, 0.04);
+  transform: translateY(18%);
 }
 
 .sdg-orbit-glow {
@@ -159,8 +162,8 @@ html {
 }
 
 .sdg-node-inner {
-  width: 104px;
-  height: 104px;
+  width: 112px;
+  height: 112px;
   border-radius: 9999px;
   display: flex;
   align-items: center;
@@ -186,6 +189,7 @@ html {
   text-align: center;
   padding: 1.25rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  transform: translateY(-12%);
 }
 
 /* Team grid/layout */

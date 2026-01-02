@@ -109,7 +109,7 @@ export default function SDGSection() {
             </p>
           </div>
 
-          <div ref={pinRef} className="sdg-rotator-wrap grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div ref={pinRef} className="sdg-rotator-wrap grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             {/* Rotating Orbit */}
             <div className="flex justify-center">
               <div className="sdg-rotator">
@@ -122,8 +122,8 @@ export default function SDGSection() {
                       style={{ '--angle': `${index * 90}deg`, '--badge': sdg.color }}
                       onClick={() => setActiveIndex(index)}
                     >
-                      <div className="sdg-node-inner" style={{ backgroundColor: sdg.color }}>
-                        <span className="text-white font-bold text-xl">SDG {sdg.number}</span>
+                      <div className="sdg-node-inner">
+                        <img src={sdg.image} alt={`SDG ${sdg.number}`} className="w-full h-full object-contain p-3" />
                       </div>
                     </button>
                   ))}
