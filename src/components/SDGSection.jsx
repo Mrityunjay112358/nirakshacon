@@ -1,114 +1,127 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-const WRAPPER_HEIGHT = 220; // vh
-const ORBIT_SIZE = { min: 480, ideal: 820, max: 880 }; // px (larger orbit)
-const ICON_SIZE = { min: 140, ideal: 170, max: 190 }; // px (larger active icon)
-const VISIBLE_RATIO = 0.55; // tighter crop to avoid peeking
+const WRAPPER_HEIGHT_VH = 240;
+const ORBIT_SIZE = { min: 520, ideal: 820, max: 880 };
+const ICON_SIZE = { min: 140, ideal: 170, max: 190 };
+const VISIBLE_RATIO = 0.55; // top arc only
 
 const SDGS = [
   {
-    number: 3,
+    id: 3,
     title: 'Good Health and Well-being',
     description:
       'Eliminates chronic pesticide exposure for farmers. India sees 1M+ acute poisonings annually from chemical handling. Precision targeting means farmers spray less, inhale and drink less, and handle fewer toxic substances. Crops carry lower chemical residue, reducing health risks for consumers.',
-    image: '/sdg/03.png'
+    icon: '/sdg/03.png'
   },
   {
-    number: 6,
+    id: 6,
     title: 'Clean Water and Sanitation',
     description:
       'Prevents agricultural runoff at the source. Currently, 80% of sprayed pesticides miss targets and leach into groundwater and watersheds. By reducing pesticide volume by 40–50% and targeting only affected zones, Niraksha directly protects water quality for rural communities dependent on these sources.',
-    image: '/sdg/06.png'
+    icon: '/sdg/06.png'
   },
   {
-    number: 12,
+    id: 12,
     title: 'Responsible Consumption and Production',
     description:
       'Transforms wasteful blanket spraying into data-driven precision agriculture. Farmers currently waste ₹400/acre on chemicals that never reach pests. Niraksha enables targeted intervention, cutting input consumption while maintaining (and improving) crop protection outcomes.',
-    image: '/sdg/12.png'
+    icon: '/sdg/12.png'
   },
   {
-    number: 13,
+    id: 13,
     title: 'Climate Action',
     description:
       'Healthier soil sequesters more carbon. Pesticide overuse degrades soil microbiomes and reduces organic matter, which is the earth’s natural carbon sink. By minimizing chemical load on farmland, Niraksha preserves soil health and supports climate-resilient agricultural ecosystems across 140M hectares of Indian farmland.',
-    image: '/sdg/13.png'
+    icon: '/sdg/13.png'
   }
 ];
 
 export default function SDGSection() {
-  const containerRef = useRef(null);
-  const [rotation, setRotation] = useState(0);
+  const wrapperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [rotation, setRotation] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const snapTimeout = useRef(null);
+  const [imageError, setImageError] = useState({});
+  const debugRef = useRef({
+    wrapperTop: 0,
+    wrapperHeight: 0,
+    scrollY: 0,
+    progress: 0,
+    activeIndex: 0,
+    activeId: SDGS[0].id
+  });
 
-  const segment = 360 / SDGS.length;
-
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(media.matches);
-    const onMedia = () => setReducedMotion(media.matches);
-    media.addEventListener('change', onMedia);
-
-    if (media.matches) {
-      return () => media.removeEventListener('change', onMedia);
-    }
-
-    let frame = null;
-    const onScroll = () => {
-      if (frame) return;
-      frame = requestAnimationFrame(() => {
-        frame = null;
-        const el = containerRef.current;
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const viewport = window.innerHeight || 1;
-        const total = rect.height - viewport;
-        if (total <= 0) return;
-        const progress = Math.min(Math.max((viewport - rect.top) / total, 0), 1);
-        const nextRotation = progress * 360;
-        setRotation(nextRotation);
-
-        const idx = Math.round((progress * (SDGS.length - 1)));
-        if (idx !== activeIndex) setActiveIndex(idx);
-
-        if (snapTimeout.current) clearTimeout(snapTimeout.current);
-        snapTimeout.current = setTimeout(() => {
-          const snappedRotation = (idx / SDGS.length) * 360;
-          setRotation(snappedRotation);
-        }, 120);
-      });
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      media.removeEventListener('change', onMedia);
-      if (frame) cancelAnimationFrame(frame);
-      if (snapTimeout.current) clearTimeout(snapTimeout.current);
-    };
-  }, [activeIndex]);
-
-  const active = SDGS[activeIndex];
-
-  const iconSize = useMemo(
-    () => `clamp(${ICON_SIZE.min}px, ${ICON_SIZE.ideal}px, ${ICON_SIZE.max}px)`,
-    []
-  );
   const orbitSize = useMemo(
     () => `clamp(${ORBIT_SIZE.min}px, ${ORBIT_SIZE.ideal}px, ${ORBIT_SIZE.max}px)`,
     []
   );
+  const iconSize = useMemo(
+    () => `clamp(${ICON_SIZE.min}px, ${ICON_SIZE.ideal}px, ${ICON_SIZE.max}px)`,
+    []
+  );
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(media.matches);
+    const handleMedia = () => setReducedMotion(media.matches);
+    media.addEventListener('change', handleMedia);
+
+    const handle = () => {
+      const el = wrapperRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const wrapperTop = window.scrollY + rect.top;
+      const wrapperHeight = rect.height;
+      const viewportHeight = window.innerHeight || 1;
+      const scrollY = window.scrollY;
+      const denom = Math.max(wrapperHeight - viewportHeight, 1);
+      const progress = Math.min(Math.max((scrollY - wrapperTop) / denom, 0), 1);
+      const idx = Math.round(progress * (SDGS.length - 1));
+      setActiveIndex(idx);
+      setRotation(progress * 360);
+      debugRef.current = {
+        wrapperTop: Math.round(wrapperTop),
+        wrapperHeight: Math.round(wrapperHeight),
+        scrollY: Math.round(scrollY),
+        progress: Number(progress.toFixed(3)),
+        activeIndex: idx,
+        activeId: SDGS[idx].id
+      };
+    };
+
+    const onScroll = () => requestAnimationFrame(handle);
+    const onResize = () => requestAnimationFrame(handle);
+    handle();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+      media.removeEventListener('change', handleMedia);
+    };
+  }, []);
+
+  const active = SDGS[activeIndex];
+  const showFallback = imageError[active.id];
 
   return (
     <section
-      ref={containerRef}
-      className="sdg-section relative px-6 bg-gradient-to-b from-primary to-primary-light overflow-visible"
-      style={{ height: `${WRAPPER_HEIGHT}vh` }}
+      ref={wrapperRef}
+      className="relative px-6 bg-gradient-to-b from-primary to-primary-light overflow-visible"
+      style={{ height: `${WRAPPER_HEIGHT_VH}vh` }}
     >
       <div className="max-w-6xl mx-auto h-full">
         <div className="sticky top-0 h-screen flex flex-col">
+          {/* Debug overlay */}
+          <div className="fixed top-4 left-4 z-30 bg-black/70 text-xs text-white px-3 py-2 rounded-lg space-y-1 pointer-events-none">
+            <div>wrapperTop: {debugRef.current.wrapperTop}</div>
+            <div>wrapperHeight: {debugRef.current.wrapperHeight}</div>
+            <div>scrollY: {debugRef.current.scrollY}</div>
+            <div>progress: {debugRef.current.progress}</div>
+            <div>activeIndex: {debugRef.current.activeIndex}</div>
+            <div>activeId: {debugRef.current.activeId}</div>
+          </div>
+
           {/* Header */}
           <div className="pt-8 pb-4 text-center">
             <h2 className="text-4xl md:text-6xl font-bold text-white">
@@ -126,7 +139,7 @@ export default function SDGSection() {
               style={{
                 width: orbitSize,
                 height: `calc(${orbitSize} * ${VISIBLE_RATIO})`,
-                clipPath: 'inset(0 0 45% 0)', // tighter crop ensures only top arc shows
+                clipPath: 'inset(0 0 45% 0)'
               }}
             >
               <div
@@ -135,13 +148,13 @@ export default function SDGSection() {
                   width: orbitSize,
                   height: orbitSize,
                   left: 0,
-                  top: `calc(-1 * ${orbitSize} * (1 - ${VISIBLE_RATIO}))`,
+                  top: `calc(-1 * ${orbitSize} * (1 - ${VISIBLE_RATIO}))`
                 }}
               >
                 <div
-                  className="sdg-ring"
+                  className="sdg-ring z-0"
                   style={{
-                    transform: `translateY(42%) ${reducedMotion ? 'rotate(0deg)' : `rotate(${rotation}deg)`}`,
+                    transform: `translateY(42%) ${reducedMotion ? 'rotate(0deg)' : `rotate(${rotation}deg)`}`
                   }}
                   aria-hidden
                 >
@@ -149,11 +162,10 @@ export default function SDGSection() {
                   <div className="sdg-orbit-dots" />
                 </div>
 
-                {/* Active icon only */}
                 <div
-                  className="absolute left-1/2 -translate-x-1/2"
+                  className="absolute left-1/2 -translate-x-1/2 z-20"
                   style={{
-                    top: `calc(${orbitSize} * 0.02)`, // pull icon closer to arc apex
+                    top: `calc(${orbitSize} * 0.02)`
                   }}
                 >
                   <div
@@ -162,21 +174,32 @@ export default function SDGSection() {
                       width: iconSize,
                       height: iconSize,
                       boxShadow: '0 18px 50px rgba(0,0,0,0.45)',
-                      margin: '0 auto',
+                      margin: '0 auto'
                     }}
                   >
-                    <img
-                      src={active.image}
-                      alt={`SDG ${active.number}`}
-                      className="w-full h-full object-contain"
-                    />
+                    {!showFallback ? (
+                      <img
+                        src={active.icon}
+                        alt={`SDG ${active.id}`}
+                        className="w-full h-full object-contain"
+                        loading="eager"
+                        onError={() => setImageError((prev) => ({ ...prev, [active.id]: true }))}
+                      />
+                    ) : (
+                      <div
+                        className="w-full h-full flex items-center justify-center text-white text-3xl font-bold"
+                        style={{ background: 'rgba(255,255,255,0.08)' }}
+                      >
+                        {active.id}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
 
             <div
-              key={active.number}
+              key={active.id}
               className="sdg-detail-card glass rounded-3xl shadow-2xl border border-white/10 transition-all duration-500 ease-out"
               style={{ width: 'min(1000px, 92vw)' }}
             >
