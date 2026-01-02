@@ -100,6 +100,7 @@ export default function SDGSection() {
 
   const active = SDGS[activeIndex];
   const showFallback = imageError[active.id];
+  const snappedRotation = reducedMotion ? 0 : (activeIndex / SDGS.length) * 360;
 
   return (
     <section
@@ -159,7 +160,7 @@ export default function SDGSection() {
                 <div
                   className="sdg-ring z-0"
                   style={{
-                    transform: `translateY(42%) ${rotation === 0 || reducedMotion ? 'rotate(0deg)' : `rotate(${rotation}deg)`}`
+                    transform: `translateY(42%) rotate(${snappedRotation}deg)`
                   }}
                   aria-hidden
                 >
@@ -186,9 +187,7 @@ export default function SDGSection() {
                       position: 'relative',
                       overflow: 'hidden',
                       background: 'rgba(255,255,255,0.12)',
-                      border: '1px solid rgba(255,255,255,0.25)',
-                      transform:
-                        rotation === 0 || reducedMotion ? undefined : `rotate(${rotation * -0.2}deg)`
+                      border: '1px solid rgba(255,255,255,0.25)'
                     }}
                   >
                     {!showFallback ? (
