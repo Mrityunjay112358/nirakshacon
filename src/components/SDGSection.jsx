@@ -55,8 +55,7 @@ export default function SDGSection() {
     () => `clamp(${ORBIT_SIZE.min}px, ${ORBIT_SIZE.ideal}px, ${ORBIT_SIZE.max}px)`,
     []
   );
-  const iconSizeDesktop = `${ICON_SIZE.desktop}px`;
-  const iconSizeMobile = `${ICON_SIZE.mobile}px`;
+  const iconClamp = `clamp(${ICON_SIZE.mobile}px, 20vw, ${ICON_SIZE.desktop}px)`;
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -131,17 +130,14 @@ export default function SDGSection() {
           </div>
 
           {/* Header */}
-          <div className="pt-8 pb-4 text-center">
+          <div className="pt-8 pb-2 text-center">
             <h2 className="text-4xl md:text-6xl font-bold text-white">
               Aligned with UN <span className="gradient-text">Sustainable Development Goals</span>
             </h2>
-            <p className="mt-3 text-lg md:text-xl text-muted max-w-3xl mx-auto">
-              Scroll to rotate — one goal at a time.
-            </p>
           </div>
 
           {/* Orbit + card */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-10">
+          <div className="flex-1 flex flex-col items-center justify-center gap-6 md:gap-8">
             <div
               className="sdg-rotator relative"
               style={{
@@ -174,12 +170,13 @@ export default function SDGSection() {
                   className="absolute left-1/2 -translate-x-1/2 z-30 flex items-center justify-center"
                   style={{
                     top: `calc(${orbitSize} * (1 - ${VISIBLE_RATIO}) + ${orbitSize} * 0.05)`,
-                    width: iconSizeDesktop,
-                    height: iconSizeDesktop
+                    width: iconClamp,
+                    height: iconClamp
                   }}
                 >
                   <div
-                    className={`sdg-node-inner ${reducedMotion ? '' : 'transition-all duration-500 ease-out'} ${reducedMotion ? '' : 'will-change-transform'}`}
+                    key={active.id}
+                    className={`sdg-node-inner ${reducedMotion ? '' : 'sdg-icon-anim'} ${reducedMotion ? '' : 'will-change-transform'}`}
                     style={{
                       width: '100%',
                       height: '100%',
@@ -223,7 +220,7 @@ export default function SDGSection() {
 
             <div
               key={active.id}
-              className="sdg-detail-card glass rounded-3xl shadow-2xl border border-white/10 transition-all duration-500 ease-out"
+              className="sdg-detail-card glass rounded-3xl shadow-2xl border border-white/10 transition-all duration-500 ease-out -translate-y-1 md:-translate-y-2"
               style={{ width: 'min(1000px, 92vw)' }}
             >
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">{active.title}</h3>

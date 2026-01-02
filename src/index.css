@@ -159,6 +159,21 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.sdg-icon-anim {
+  animation: sdgIconFade 0.45s ease;
+}
+
+@keyframes sdgIconFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* Team grid/layout */
 .team-grid {
   display: grid;
