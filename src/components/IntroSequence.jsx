@@ -22,6 +22,7 @@ export default function IntroSequence() {
     gsap.set('.hero-stats', { y: 30, opacity: 0, scale: 0.9 });
     gsap.set('.scroll-indicator', { opacity: 0 });
     gsap.set('.farm-bg', { scale: 1.1 });
+    gsap.set('.initial-scroll-indicator', { opacity: 1 });
 
     const introTl = gsap.timeline({
       scrollTrigger: {
@@ -35,6 +36,13 @@ export default function IntroSequence() {
     });
 
     introTl
+      // Hide initial scroll indicator
+      .to('.initial-scroll-indicator', {
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.in'
+      }, 0)
+
       // Phase 1: Farm background subtle zoom out (0-15% of scroll)
       .to('.farm-bg', {
         scale: 1,
@@ -133,6 +141,14 @@ export default function IntroSequence() {
 
   return (
     <div ref={container}>
+      {/* Initial Scroll Indicator - Before Animation */}
+      <div className="initial-scroll-indicator fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 text-center pointer-events-none">
+        <span className="text-muted text-lg md:text-xl uppercase tracking-widest mb-4 block">Scroll to explore</span>
+        <div className="w-6 h-10 border-2 border-muted/50 rounded-full flex justify-center mx-auto">
+          <div className="w-1.5 h-3 bg-highlight rounded-full mt-2 animate-bounce" />
+        </div>
+      </div>
+
       <section className="intro-wrapper relative h-screen w-full overflow-hidden">
         {/* Farm Background Layer */}
         <div className="farm-bg absolute inset-0 z-0">

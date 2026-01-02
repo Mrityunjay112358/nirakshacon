@@ -23,7 +23,7 @@ export default function Navigation() {
     { label: 'Results', href: '#results' },
     { label: 'SDGs', href: '#sdgs' },
     { label: 'Team', href: '#team' },
-    { label: 'Validation', href: '#validation' },
+    { label: 'Endorsements', href: '#validation' },
     { label: 'Contact', href: '#contact' }
   ];
 

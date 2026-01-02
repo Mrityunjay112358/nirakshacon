@@ -12,6 +12,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 96px; /* Account for fixed nav bar (64px) + extra spacing (32px) */
 }
 
 body {
@@ -26,6 +27,15 @@ body {
 /* Smooth scrolling for pinned sections */
 .pin-spacer {
   background-color: #0A1628 !important;
+}
+
+/* Scroll margin for sections to avoid navbar overlap */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+footer[id] {
+  scroll-margin-top: 96px;
 }
 
 /* Custom animations */
