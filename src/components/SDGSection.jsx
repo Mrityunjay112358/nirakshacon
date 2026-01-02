@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 const WRAPPER_HEIGHT = 220; // vh
-const ORBIT_SIZE = { min: 360, ideal: 820, max: 880 }; // px
-const ICON_SIZE = { min: 120, ideal: 160, max: 180 }; // px
-const VISIBLE_RATIO = 0.6; // show top arc only
+const ORBIT_SIZE = { min: 480, ideal: 820, max: 880 }; // px (larger orbit)
+const ICON_SIZE = { min: 140, ideal: 170, max: 190 }; // px (larger active icon)
+const VISIBLE_RATIO = 0.55; // tighter crop to avoid peeking
 
 const SDGS = [
   {
@@ -126,7 +126,7 @@ export default function SDGSection() {
               style={{
                 width: orbitSize,
                 height: `calc(${orbitSize} * ${VISIBLE_RATIO})`,
-                clipPath: 'inset(0 0 40% 0)',
+                clipPath: 'inset(0 0 45% 0)', // tighter crop ensures only top arc shows
               }}
             >
               <div
@@ -153,7 +153,7 @@ export default function SDGSection() {
                 <div
                   className="absolute left-1/2 -translate-x-1/2"
                   style={{
-                    top: `calc(${orbitSize} * 0.08)`,
+                    top: `calc(${orbitSize} * 0.02)`, // pull icon closer to arc apex
                   }}
                 >
                   <div
@@ -162,6 +162,7 @@ export default function SDGSection() {
                       width: iconSize,
                       height: iconSize,
                       boxShadow: '0 18px 50px rgba(0,0,0,0.45)',
+                      margin: '0 auto',
                     }}
                   >
                     <img
