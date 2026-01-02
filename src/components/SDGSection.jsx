@@ -171,9 +171,9 @@ export default function SDGSection() {
                 </div>
 
                 <div
-                  className="absolute left-1/2 -translate-x-1/2 z-20 flex items-center justify-center"
+                  className="absolute left-1/2 -translate-x-1/2 z-30 flex items-center justify-center"
                   style={{
-                    top: `calc(${orbitSize} * 0.02)`,
+                    top: `calc(${orbitSize} * 0.04)`,
                     width: iconSizeDesktop,
                     height: iconSizeDesktop
                   }}
@@ -187,8 +187,8 @@ export default function SDGSection() {
                       margin: '0 auto',
                       position: 'relative',
                       overflow: 'hidden',
-                      background: 'rgba(255,255,255,0.06)',
-                      border: '1px solid rgba(255,255,255,0.18)'
+                      background: 'rgba(255,255,255,0.12)',
+                      border: '1px solid rgba(255,255,255,0.25)'
                     }}
                   >
                     {!showFallback ? (
@@ -202,6 +202,10 @@ export default function SDGSection() {
                         onError={() => {
                           console.warn('SDG icon failed to load', active.icon);
                           setImageError((prev) => ({ ...prev, [active.id]: true }));
+                        }}
+                        onLoad={() => {
+                          console.info('SDG icon loaded', active.icon);
+                          setImageError((prev) => ({ ...prev, [active.id]: false }));
                         }}
                       />
                     ) : (
