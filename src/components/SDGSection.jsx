@@ -173,7 +173,7 @@ export default function SDGSection() {
                 <div
                   className="absolute left-1/2 -translate-x-1/2 z-30 flex items-center justify-center"
                   style={{
-                    top: `calc(${orbitSize} * 0.04)`,
+                    top: `calc(${orbitSize} * (1 - ${VISIBLE_RATIO}) + ${orbitSize} * 0.05)`,
                     width: iconSizeDesktop,
                     height: iconSizeDesktop
                   }}
