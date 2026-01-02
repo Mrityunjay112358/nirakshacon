@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 const WRAPPER_HEIGHT_VH = 240;
 const ORBIT_SIZE = { min: 520, ideal: 820, max: 880 };
-const ICON_SIZE = { min: 140, ideal: 170, max: 190 };
+const ICON_SIZE = { desktop: 160, mobile: 120 };
 const VISIBLE_RATIO = 0.55; // top arc only
 
 const SDGS = [
@@ -55,10 +55,8 @@ export default function SDGSection() {
     () => `clamp(${ORBIT_SIZE.min}px, ${ORBIT_SIZE.ideal}px, ${ORBIT_SIZE.max}px)`,
     []
   );
-  const iconSize = useMemo(
-    () => `clamp(${ICON_SIZE.min}px, ${ICON_SIZE.ideal}px, ${ICON_SIZE.max}px)`,
-    []
-  );
+  const iconSizeDesktop = `${ICON_SIZE.desktop}px`;
+  const iconSizeMobile = `${ICON_SIZE.mobile}px`;
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -113,13 +111,22 @@ export default function SDGSection() {
       <div className="max-w-6xl mx-auto h-full">
         <div className="sticky top-0 h-screen flex flex-col">
           {/* Debug overlay */}
-          <div className="fixed top-4 left-4 z-30 bg-black/70 text-xs text-white px-3 py-2 rounded-lg space-y-1 pointer-events-none">
+          <div className="fixed top-4 left-4 z-30 bg-black/70 text-xs text-white px-3 py-2 rounded-lg space-y-1 pointer-events-auto">
             <div>wrapperTop: {debugRef.current.wrapperTop}</div>
             <div>wrapperHeight: {debugRef.current.wrapperHeight}</div>
             <div>scrollY: {debugRef.current.scrollY}</div>
             <div>progress: {debugRef.current.progress}</div>
             <div>activeIndex: {debugRef.current.activeIndex}</div>
             <div>activeId: {debugRef.current.activeId}</div>
+            <div>iconUrl: {active.icon}</div>
+            <a
+              className="underline text-blue-300"
+              href={active.icon}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open icon
+            </a>
           </div>
 
           {/* Header */}
@@ -163,16 +170,18 @@ export default function SDGSection() {
                 </div>
 
                 <div
-                  className="absolute left-1/2 -translate-x-1/2 z-20"
+                  className="absolute left-1/2 -translate-x-1/2 z-20 flex items-center justify-center"
                   style={{
-                    top: `calc(${orbitSize} * 0.02)`
+                    top: `calc(${orbitSize} * 0.02)`,
+                    width: iconSizeDesktop,
+                    height: iconSizeDesktop
                   }}
                 >
                   <div
                     className={`sdg-node-inner ${reducedMotion ? '' : 'transition-all duration-500 ease-out'} ${reducedMotion ? '' : 'will-change-transform'}`}
                     style={{
-                      width: iconSize,
-                      height: iconSize,
+                      width: '100%',
+                      height: '100%',
                       boxShadow: '0 18px 50px rgba(0,0,0,0.45)',
                       margin: '0 auto'
                     }}
@@ -183,12 +192,15 @@ export default function SDGSection() {
                         alt={`SDG ${active.id}`}
                         className="w-full h-full object-contain"
                         loading="eager"
-                        onError={() => setImageError((prev) => ({ ...prev, [active.id]: true }))}
+                        onError={() => {
+                          console.warn('SDG icon failed to load', active.icon);
+                          setImageError((prev) => ({ ...prev, [active.id]: true }));
+                        }}
                       />
                     ) : (
                       <div
-                        className="w-full h-full flex items-center justify-center text-white text-3xl font-bold"
-                        style={{ background: 'rgba(255,255,255,0.08)' }}
+                        className="w-full h-full flex items-center justify-center text-white text-4xl font-bold"
+                        style={{ background: 'rgba(255,255,255,0.12)' }}
                       >
                         {active.id}
                       </div>
