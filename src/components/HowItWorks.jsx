@@ -40,7 +40,7 @@ export default function HowItWorks() {
   return (
     <section ref={container} className="relative bg-gradient-to-b from-primary-light to-primary overflow-visible z-10">
       {/* Section Header - Outside the pinned container */}
-      <div className="text-center py-16 md:py-20 px-6">
+      <div className="text-center py-16 md:py-20 px-6 max-w-5xl mx-auto">
         <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
           How It <span className="gradient-text">Works</span>
         </h2>
@@ -48,7 +48,7 @@ export default function HowItWorks() {
       </div>
 
       {/* Horizontal Scroll Container - This gets pinned */}
-      <div className="process-container relative h-screen">
+      <div className="process-container relative h-[80vh] md:h-screen">
         {/* Connecting Line */}
         <div className="connecting-line absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-highlight/50 to-highlight z-0 pointer-events-none" />
 

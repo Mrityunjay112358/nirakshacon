@@ -94,3 +94,66 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #5B9A6F;
 }
+
+/* Ensure content is not clipped in grid sections */
+.sdg-section,
+.team-section {
+  overflow: visible !important;
+}
+
+/* SDG grid/layout */
+.sdg-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+
+.sdg-card {
+  border: none !important;
+  background: transparent !important;
+  transition: transform 0.3s;
+}
+
+.sdg-card:hover {
+  transform: translateY(-8px);
+}
+
+/* Team grid/layout */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+
+.team-card {
+  border: none !important;
+  background: rgba(255, 255, 255, 0.02);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .sdg-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .sdg-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

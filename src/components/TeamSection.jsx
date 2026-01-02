@@ -65,11 +65,11 @@ export default function TeamSection() {
         </div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-12">
+        <div className="team-grid mb-12">
           {team.map((member, index) => (
             <div
               key={index}
-              className="team-card bg-primary-light/20 rounded-2xl p-6 group hover:-translate-y-3 hover:shadow-2xl transition-all duration-300"
+              className="team-card rounded-2xl p-6 group"
             >
               {/* Avatar */}
               <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-highlight/20 to-accent/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">

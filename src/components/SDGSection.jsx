@@ -70,11 +70,11 @@ export default function SDGSection() {
           </div>
 
           {/* SDG Grid */}
-          <div className="sdg-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 w-full">
+          <div className="sdg-grid">
             {sdgs.map((sdg) => (
               <div
                 key={sdg.number}
-                className="sdg-card cursor-pointer hover:-translate-y-2 transition-all duration-300 group"
+                className="sdg-card cursor-pointer group"
                 onClick={() => setSelectedSDG(sdg)}
               >
                 <div className="aspect-square rounded-xl overflow-hidden mb-4 group-hover:shadow-2xl transition-shadow" style={{ backgroundColor: sdg.color }}>
