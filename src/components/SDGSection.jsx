@@ -95,7 +95,7 @@ export default function SDGSection() {
     >
       <div className="max-w-6xl mx-auto h-full">
         <div
-          className="sticky top-0 h-screen grid gap-6 md:gap-8"
+          className="sticky top-0 h-screen grid gap-4 md:gap-6"
           style={{ gridTemplateRows: 'auto minmax(380px,1fr) auto' }}
         >
           {/* Header */}
@@ -106,7 +106,7 @@ export default function SDGSection() {
           </div>
 
           {/* Orbit row */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-end justify-center">
             <div
               className="sdg-rotator relative"
               style={{
@@ -190,7 +190,7 @@ export default function SDGSection() {
           </div>
 
           {/* Card row */}
-          <div className="flex items-start justify-center pb-10 md:pb-12">
+          <div className="flex items-start justify-center pb-8 md:pb-10">
             <div
               key={active.id}
               className="sdg-detail-card glass rounded-3xl shadow-2xl border border-white/10 transition-all duration-500 ease-out"
