@@ -131,7 +131,7 @@ html {
   width: min(90vw, 520px);
   aspect-ratio: 1;
   overflow: hidden;
-  clip-path: inset(0 0 62% 0);
+  clip-path: inset(0 0 75% 0);
 }
 
 .sdg-ring {
@@ -141,7 +141,7 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: radial-gradient(circle at center, rgba(76, 159, 56, 0.15), transparent 65%);
   box-shadow: 0 0 80px rgba(0, 0, 0, 0.35) inset, 0 0 40px rgba(255, 255, 255, 0.04);
-  transform: translateY(32%);
+  transform: translateY(40%);
 }
 
 .sdg-orbit-glow {
@@ -153,7 +153,7 @@ html {
 }
 
 .sdg-node {
-  --radius: min(34vw, 210px);
+  --radius: min(34vw, 220px);
   position: absolute;
   top: 50%;
   left: 50%;

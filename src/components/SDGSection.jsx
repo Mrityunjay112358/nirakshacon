@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default function SDGSection() {
   const container = useRef();
   const ringRef = useRef();
-  const pinRef = useRef();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const sdgs = [
@@ -46,16 +45,15 @@ export default function SDGSection() {
     const total = sdgs.length;
     const cards = gsap.utils.toArray('.sdg-detail-card');
 
-    // Pin and rotate the orbit
+    // Rotate the orbit purely from scroll progress (no vertical movement)
     const rotation = gsap.to(ringRef.current, {
       rotate: 360,
       ease: 'none',
       scrollTrigger: {
         trigger: container.current,
         start: 'top center+=40',
-        end: '+=1600',
-        scrub: true,
-        pin: pinRef.current
+        end: 'bottom top',
+        scrub: true
       }
     });
 
@@ -64,7 +62,7 @@ export default function SDGSection() {
     const stepper = ScrollTrigger.create({
       trigger: container.current,
       start: 'top center+=40',
-      end: '+=1600',
+      end: 'bottom top',
       scrub: true,
       onUpdate: (self) => {
         const segment = Math.min(total - 1, Math.floor(self.progress * total));
@@ -105,10 +103,10 @@ export default function SDGSection() {
 
   return (
     <>
-      <section ref={container} className="sdg-section relative py-24 md:py-28 px-6 bg-gradient-to-b from-primary to-primary-light overflow-visible">
-        <div className="max-w-6xl mx-auto">
+      <section ref={container} className="sdg-section relative h-screen px-6 bg-gradient-to-b from-primary to-primary-light overflow-visible">
+        <div className="max-w-6xl mx-auto h-full">
           {/* Section Header */}
-          <div className="text-center mb-10 md:mb-12">
+          <div className="text-center mb-6 md:mb-8 pt-6">
             <h2 className="text-4xl md:text-6xl font-bold mb-4 text-white">
               Aligned with UN <span className="gradient-text">Sustainable Development Goals</span>
             </h2>
@@ -117,23 +115,21 @@ export default function SDGSection() {
             </p>
           </div>
 
-          <div ref={pinRef} className="sdg-rotator-wrap flex flex-col items-center gap-8 md:gap-10">
-            {/* Rotating Orbit */}
+          <div className="sdg-stage sticky top-0 h-[calc(100vh-96px)] flex flex-col items-center justify-start gap-8 md:gap-10">
             <div className="sdg-rotator">
               <div className="sdg-ring" ref={ringRef}>
                 <div className="sdg-orbit-glow" />
                 {sdgs.map((sdg, index) => (
-                  <button
+                  <div
                     key={sdg.number}
                     className={`sdg-node ${activeIndex === index ? 'is-active' : ''}`}
                     style={{ '--angle': `${index * 90}deg` }}
-                    onClick={() => setActiveIndex(index)}
                     aria-label={`SDG ${sdg.number}`}
                   >
                     <div className="sdg-node-inner">
                       <img src={sdg.image} alt={`SDG ${sdg.number}`} className="w-full h-full object-contain" />
                     </div>
-                  </button>
+                  </div>
                 ))}
               </div>
 
@@ -142,7 +138,6 @@ export default function SDGSection() {
               </div>
             </div>
 
-            {/* Detail Panel */}
             <div className="sdg-detail-card glass rounded-3xl p-8 md:p-10 shadow-2xl max-w-3xl w-full">
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 {active.title}
