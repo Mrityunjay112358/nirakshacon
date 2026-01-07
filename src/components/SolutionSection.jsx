@@ -125,8 +125,8 @@ export default function SolutionSection() {
             <div className="w-12 h-12 bg-highlight/20 rounded-lg flex items-center justify-center mb-4">
               <Leaf className="w-7 h-7 text-highlight" />
             </div>
-            <div className="text-3xl font-bold text-highlight mb-2">40-50%</div>
-            <p className="text-muted">Less Pesticide</p>
+            <div className="text-3xl font-bold text-highlight mb-2">40%</div>
+            <p className="text-muted">Pesticide Reduction</p>
           </div>
 
           <div className="benefit-card glass rounded-xl p-6 hover:scale-105 transition-transform duration-300">

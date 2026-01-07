@@ -36,23 +36,23 @@ export default function TeamSection() {
   const team = [
     {
       name: 'Aaditya Jain',
-      role: 'Problem Validation & Farmer Research'
+      role: 'Hardware Prototyping'
     },
     {
       name: 'Mrityunjay Gupta',
-      role: 'Hardware & AI Development'
+      role: 'AI Research & Development'
     },
     {
       name: 'Ariana Agarwal',
-      role: 'Farmer Outreach & FPO Partnerships'
+      role: 'Financial Analysis & FPO Partnerships'
     },
     {
       name: 'Yashkit Jain',
       role: 'Product Design'
     },
     {
-      name: 'Ritwika Sinwer',
-      role: 'Field Data & Trials'
+      name: 'Ritwika Sinver',
+      role: 'Market Analysis & Field Trials'
     }
   ];
 

@@ -110,7 +110,7 @@ export default function TechnologySection() {
       backDetails: [
         'Onboard sensors: temperature, humidity, light, pressure',
         'Dynamic model reweighting based on conditions',
-        '+12-24% accuracy in variable conditions',
+        '+12-21% accuracy in variable conditions',
         'No static weights, just intelligence that responds'
       ]
     },
@@ -172,7 +172,7 @@ export default function TechnologySection() {
             <div className="hidden md:block w-px h-6 bg-muted/30" />
             <div className="flex items-center">
               <span className="text-highlight mr-2">●</span>
-              <span className="font-medium">Raspberry Pi 5 edge compute</span>
+              <span className="font-medium">Raspberry Pi 5 Companion Computer</span>
             </div>
             <div className="hidden md:block w-px h-6 bg-muted/30" />
             <div className="flex items-center">

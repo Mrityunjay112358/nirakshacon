@@ -25,7 +25,7 @@ const SDGS = [
     id: 12,
     title: 'Responsible Consumption and Production',
     description:
-      'Transforms wasteful blanket spraying into data-driven precision agriculture. Farmers currently waste $40–50 per acre per season on chemicals that never reach pests. Niraksha enables targeted intervention, cutting input consumption while maintaining (and improving) crop protection outcomes.',
+      'Transforms wasteful blanket spraying into data-driven precision agriculture. Farmers currently waste $50-75 per acre per season on chemicals that never reach pests. Niraksha enables targeted intervention, cutting input consumption while maintaining (and improving) crop protection outcomes.',
     icon: '/assets/images/sdg12.png'
   },
   {

@@ -204,8 +204,8 @@ export default function IntroSequence() {
               <div className="text-sm text-muted uppercase tracking-widest mt-1">Detection Accuracy</div>
             </div>
             <div className="hero-stats text-center">
-              <div className="text-4xl md:text-5xl font-bold text-highlight">40-50%</div>
-              <div className="text-sm text-muted uppercase tracking-widest mt-1">Less Pesticide</div>
+              <div className="text-4xl md:text-5xl font-bold text-highlight">40%</div>
+              <div className="text-sm text-muted uppercase tracking-widest mt-1">Pesticide Reduction</div>
             </div>
             <div className="hero-stats text-center">
               <div className="text-4xl md:text-5xl font-bold text-highlight">500+</div>
