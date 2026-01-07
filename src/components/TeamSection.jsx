@@ -36,28 +36,23 @@ export default function TeamSection() {
   const team = [
     {
       name: 'Aaditya Jain',
-      role: 'Problem Validation & Farmer Research',
-      description: 'Led on-ground farmer interviews and market validation'
+      role: 'Problem Validation & Farmer Research'
     },
     {
       name: 'Mrityunjay Gupta',
-      role: 'Hardware & AI Development',
-      description: 'Architected the tri-modal AI system and drone hardware'
+      role: 'Hardware & AI Development'
     },
     {
       name: 'Ariana Agarwal',
-      role: 'Farmer Outreach & FPO Partnerships',
-      description: 'Built relationships with 5 FPOs and 150+ farmers'
+      role: 'Farmer Outreach & FPO Partnerships'
     },
     {
       name: 'Yashkit Jain',
-      role: 'Product Design',
-      description: 'Designed user experience and farmer-facing interfaces'
+      role: 'Product Design'
     },
     {
       name: 'Ritwika Sinwer',
-      role: 'Field Data & Trials',
-      description: 'Coordinated 8+ field trials and data collection'
+      role: 'Field Data & Trials'
     }
   ];
 
@@ -102,13 +97,8 @@ export default function TeamSection() {
               </h3>
 
               {/* Role */}
-              <p className="text-highlight text-sm uppercase tracking-wide mb-3 text-center font-medium">
+              <p className="text-highlight text-sm uppercase tracking-wide text-center font-medium">
                 {member.role}
-              </p>
-
-              {/* Description */}
-              <p className="text-muted text-sm text-center leading-relaxed">
-                {member.description}
               </p>
             </div>
           ))}

@@ -112,9 +112,9 @@ export default function ResultsSection() {
         <div className="farmer-quote glass rounded-2xl p-8 md:p-12 mb-16 max-w-4xl mx-auto">
           <Quote className="w-12 h-12 text-highlight mb-6" />
           <p className="text-2xl md:text-3xl text-white font-medium mb-6 leading-relaxed">
-            "Validated across 500+ acres with 120+ farmers in India, achieving 95% detection accuracy, 40-50% pesticide reduction, and 10-12% yield improvement."
+            "92% of surveyed farmers expressed strong intent to adopt at pricing below $10/acre."
           </p>
-          <p className="text-muted text-lg">Field Validation Study, 2024</p>
+          <p className="text-muted text-lg">Field Validation Study, 2025</p>
         </div>
 
         {/* Video & Photo Grid */}

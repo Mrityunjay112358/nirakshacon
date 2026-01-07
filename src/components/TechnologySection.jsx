@@ -172,7 +172,7 @@ export default function TechnologySection() {
             <div className="hidden md:block w-px h-6 bg-muted/30" />
             <div className="flex items-center">
               <span className="text-highlight mr-2">●</span>
-              <span className="font-medium">Raspberry Pi 4 edge compute</span>
+              <span className="font-medium">Raspberry Pi 5 edge compute</span>
             </div>
             <div className="hidden md:block w-px h-6 bg-muted/30" />
             <div className="flex items-center">
