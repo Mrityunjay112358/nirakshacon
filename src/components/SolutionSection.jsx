@@ -120,7 +120,7 @@ export default function SolutionSection() {
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <div className="benefit-card glass rounded-xl p-6 hover:scale-105 transition-transform duration-300">
             <div className="w-12 h-12 bg-highlight/20 rounded-lg flex items-center justify-center mb-4">
               <Leaf className="w-7 h-7 text-highlight" />
