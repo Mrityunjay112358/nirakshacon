@@ -94,8 +94,8 @@ export default function ResultsSection() {
           </div>
 
           <div className="glass rounded-2xl p-6 md:p-8 text-center hover:scale-105 transition-transform">
-            <div className="result-number text-4xl md:text-5xl font-bold text-highlight mb-2" data-target="50" data-suffix="%">
-              0%
+            <div className="text-4xl md:text-5xl font-bold text-highlight mb-2">
+              40-50%
             </div>
             <p className="text-sm md:text-base text-muted uppercase tracking-wide">Pesticide Reduction</p>
           </div>
