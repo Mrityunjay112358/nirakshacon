@@ -129,13 +129,6 @@ export default function HowItWorks() {
                         Adapts to each farm's unique conditions
                       </li>
                     </ul>
-                    <div className="rounded-xl overflow-hidden">
-                      <img
-                        src="/assets/diagrams/niraksha innovation  EAMF + TTA Pipeline.png"
-                        alt="AI Architecture"
-                        className="w-full h-auto"
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
