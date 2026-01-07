@@ -97,7 +97,7 @@ export default function ProblemSection() {
                 <AlertTriangle className="w-8 h-8 text-warning" />
               </div>
               <div className="text-4xl md:text-5xl font-bold text-warning mb-3">
-                ₹<span className="stat-number" data-target="25000">0</span>
+                $<span className="stat-number" data-target="300">0</span>
               </div>
               <p className="text-lg text-muted uppercase tracking-wide">
                 Damage cost per acre annually

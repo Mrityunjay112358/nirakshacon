@@ -70,7 +70,7 @@ export default function SolutionSection() {
                 </li>
                 <li className="flex items-start">
                   <span className="text-red-400 mr-2 text-xl">×</span>
-                  <span>80% of pesticides miss their target</span>
+                  <span>Only 0.1% reaches target pests; ~99.9% drifts into soil, water, and air</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-red-400 mr-2 text-xl">×</span>
@@ -139,17 +139,9 @@ export default function SolutionSection() {
 
           <div className="benefit-card glass rounded-xl p-6 hover:scale-105 transition-transform duration-300">
             <div className="w-12 h-12 bg-highlight/20 rounded-lg flex items-center justify-center mb-4">
-              <MessageSquare className="w-7 h-7 text-highlight" />
-            </div>
-            <div className="text-3xl font-bold text-highlight mb-2">Hours</div>
-            <p className="text-muted">WhatsApp Reports</p>
-          </div>
-
-          <div className="benefit-card glass rounded-xl p-6 hover:scale-105 transition-transform duration-300">
-            <div className="w-12 h-12 bg-highlight/20 rounded-lg flex items-center justify-center mb-4">
               <DollarSign className="w-7 h-7 text-highlight" />
             </div>
-            <div className="text-3xl font-bold text-highlight mb-2">₹600-800</div>
+            <div className="text-3xl font-bold text-highlight mb-2">$7-10</div>
             <p className="text-muted">Per Acre</p>
           </div>
         </div>

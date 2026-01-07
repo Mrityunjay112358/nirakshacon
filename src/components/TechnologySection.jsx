@@ -162,7 +162,7 @@ export default function TechnologySection() {
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 text-muted">
             <div className="flex items-center">
               <span className="text-highlight mr-2">●</span>
-              <span className="font-medium">₹1.08L system</span>
+              <span className="font-medium">$1,300 system</span>
             </div>
             <div className="hidden md:block w-px h-6 bg-muted/30" />
             <div className="flex items-center">
@@ -177,7 +177,7 @@ export default function TechnologySection() {
             <div className="hidden md:block w-px h-6 bg-muted/30" />
             <div className="flex items-center">
               <span className="text-highlight mr-2">●</span>
-              <span className="font-medium">18-minute flight time</span>
+              <span className="font-medium">35-minute flight time</span>
             </div>
           </div>
         </div>

@@ -18,14 +18,14 @@ const SDGS = [
     id: 6,
     title: 'Clean Water and Sanitation',
     description:
-      'Prevents agricultural runoff at the source. Currently, 80% of sprayed pesticides miss targets and leach into groundwater and watersheds. By reducing pesticide volume by 40–50% and targeting only affected zones, Niraksha directly protects water quality for rural communities dependent on these sources.',
+      'Prevents agricultural runoff at the source. Currently, only 0.1% reaches target pests; ~99.9% drifts into soil, water, and air. By reducing pesticide volume by 40–50% and targeting only affected zones, Niraksha directly protects water quality for rural communities dependent on these sources.',
     icon: '/assets/images/sdg6.png'
   },
   {
     id: 12,
     title: 'Responsible Consumption and Production',
     description:
-      'Transforms wasteful blanket spraying into data-driven precision agriculture. Farmers currently waste ₹400/acre on chemicals that never reach pests. Niraksha enables targeted intervention, cutting input consumption while maintaining (and improving) crop protection outcomes.',
+      'Transforms wasteful blanket spraying into data-driven precision agriculture. Farmers currently waste $5/acre on chemicals that never reach pests. Niraksha enables targeted intervention, cutting input consumption while maintaining (and improving) crop protection outcomes.',
     icon: '/assets/images/sdg12.png'
   },
   {
