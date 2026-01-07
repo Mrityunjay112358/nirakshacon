@@ -110,8 +110,8 @@ export default function TechnologySection() {
       backDetails: [
         'Onboard sensors: temperature, humidity, light, pressure',
         'Dynamic model reweighting based on conditions',
-        '+12 to 24% accuracy in variable conditions',
-        'No static weights—intelligence that responds'
+        '+12-24% accuracy in variable conditions',
+        'No static weights, just intelligence that responds'
       ]
     },
     {

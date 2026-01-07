@@ -66,7 +66,7 @@ export default function ProblemSection() {
             The Silent <span className="text-warning">Crisis</span>
           </h2>
           <p className="text-xl md:text-2xl text-muted max-w-4xl mx-auto leading-relaxed">
-            India's farmers spray blind. Without real-time pest visibility, they over-apply pesticides—wasting money,
+            India's farmers spray blind. Without real-time pest visibility, they over-apply pesticides, wasting money,
             contaminating water systems, and still losing 40% of their harvest.
           </p>
         </div>

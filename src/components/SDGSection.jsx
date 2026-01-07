@@ -18,7 +18,7 @@ const SDGS = [
     id: 6,
     title: 'Clean Water and Sanitation',
     description:
-      'Prevents agricultural runoff at the source. Currently, only 0.1% reaches target pests; ~99.9% drifts into soil, water, and air. By reducing pesticide volume by 40 to 50% and targeting only affected zones, Niraksha directly protects water quality for rural communities dependent on these sources.',
+      'Prevents agricultural runoff at the source. Currently, only 0.1% reaches target pests; ~99.9% drifts into soil, water, and air. By reducing pesticide volume by 40-50% and targeting only affected zones, Niraksha directly protects water quality for rural communities dependent on these sources.',
     icon: '/assets/images/sdg6.png'
   },
   {

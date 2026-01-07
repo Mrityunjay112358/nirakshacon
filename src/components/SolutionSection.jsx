@@ -141,7 +141,7 @@ export default function SolutionSection() {
             <div className="w-12 h-12 bg-highlight/20 rounded-lg flex items-center justify-center mb-4">
               <DollarSign className="w-7 h-7 text-highlight" />
             </div>
-            <div className="text-3xl font-bold text-highlight mb-2">$7 to $10</div>
+            <div className="text-3xl font-bold text-highlight mb-2">$7-$10</div>
             <p className="text-muted">Per Acre</p>
           </div>
         </div>

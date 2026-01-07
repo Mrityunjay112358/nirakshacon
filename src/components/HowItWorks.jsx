@@ -74,7 +74,7 @@ export default function HowItWorks() {
                     <ul className="space-y-3 text-lg text-muted mb-8">
                       <li className="flex items-start md:items-center">
                         <span className="text-highlight mr-2">•</span>
-                        Autonomous flight at 30 to 60m altitude
+                        Autonomous flight at 30-60m altitude
                       </li>
                       <li className="flex items-start md:items-center">
                         <span className="text-highlight mr-2">•</span>
